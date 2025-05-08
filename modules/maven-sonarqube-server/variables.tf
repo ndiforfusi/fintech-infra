@@ -28,7 +28,7 @@ variable "main-region" {
 
 variable "security_group_id" {
   description = "The security group ID to attach to the instance"
-  type        = list(string)
+  type        = string
 }
 
 variable "subnet_id" {
