@@ -1,7 +1,7 @@
 variable "ami_id" {
   description = "The AMI ID for the Jenkins server"
   type        = string
-  default     = "ami-0f226ae5ce4b11922"
+  default     = "ami-0c6b1d09930f3a3b1"
 }
 
 variable "instance_type" {
@@ -24,7 +24,7 @@ variable "main-region" {
 
 variable "security_group_id" {
   description = "The security group ID to attach to the instance"
-  type        = string
+  type        = list(string)
 }
 
 variable "subnet_id" {
