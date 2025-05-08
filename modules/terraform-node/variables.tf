@@ -1,7 +1,7 @@
 variable "ami_id" {
   description = "The AMI ID for the Terraform node"
   type        = string
-  default     = "ami-03c983f9003cb9cd1"
+  default     = "ami-0c6b1d09930f3a3b1"
 }
 
 variable "instance_type" {
@@ -19,12 +19,12 @@ variable "key_name" {
 variable "main-region" {
   description = "The AWS region to deploy resources"
   type        = string
-  default     = "us-west-2"
+  default     = "us-east-2"
 }
 
 variable "security_group_id" {
   description = "The security group ID to attach to the instance"
-  type        = string
+  type        = list(string)
 }
 
 variable "subnet_id" {
