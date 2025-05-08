@@ -20,7 +20,7 @@ variable "cluster_name" {
 
 variable "rolearn" {
   description = "Add admin role to the aws-auth configmap"
-  default     = "arn:aws:iam::322266404742:role/terraform-create-role"
+  default     = "arn:aws:iam::862994312799:role/terraform-create-role"
 }
 
 # ################################################################################
@@ -48,7 +48,7 @@ variable "tags" {
 variable "ami_id" {
   description = "The AMI ID for the Terraform node. Leave empty to automatically fetch the latest Ubuntu AMI."
   type        = string
-  default     = ""
+  default     = "862994312799"
 }
 
 variable "client_instance_type" {
@@ -67,19 +67,19 @@ variable "key_name" {
 variable "domain_name" {
   description = "Primary domain name for the certificate"
   type        = string
-  default     = "dominionsystem.org"
+  default     = "bootcamp2024$.org"
 }
 
 variable "san_domains" {
   description = "Subject alternative names for the certificate"
   type        = list(string)
-  default     = ["*.dominionsystem.org"]
+  default     = ["*.bootcamp2024$.org"]
 }
 
 variable "route53_zone_id" {
   description = "Route 53 Hosted Zone ID"
   type        = string
-  default     = "Z05475331ZK00RPD27RX0" # Replace with actual Route 53 Zone ID
+  default     = "Z05816922MMEZY1IYVIDP" # Replace with actual Route 53 Zone ID
 }
 
 
@@ -87,7 +87,7 @@ variable "route53_zone_id" {
 
 variable "aws_account_id" {
   description = "AWS Account ID"
-  default     = "999568710647"
+  default     = "862994312799"
 }
 
 variable "repositories" {
