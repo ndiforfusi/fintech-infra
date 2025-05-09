@@ -1,11 +1,12 @@
 variable "region" {
   description = "The AWS region to deploy to"
-  default     = "us-east-1"
+  default     = "us-east-2"
 }
 
 variable "ami_id" {
   description = "The AMI ID for the EC2 instance"
   type        = string
+  default     = "ami-04f167a56786e4b09"
 }
 
 variable "instance_type" {
@@ -22,7 +23,7 @@ variable "key_name" {
 variable "main-region" {
   description = "The AWS region to deploy resources"
   type        = string
-  default     = "us-west-2"
+  default     = "us-east-2"
 }
 
 variable "security_group_id" {
