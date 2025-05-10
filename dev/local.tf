@@ -1,8 +1,8 @@
-# Data block to fetch the latest Ubuntu AMI if ami_id is not provided.
+#Data block to fetch the latest Ubuntu AMI if ami_id is not provided.
 data "aws_ami" "ubuntu_latest" {
   count       = var.ami_id == "" ? 1 : 0
   most_recent = true
-  owners      = ["099720109477"] # Canonical's owner ID for Ubuntu
+  owners      = ["746669221620"] # Canonical's owner ID for Ubuntu
 
   filter {
     name   = "name"
