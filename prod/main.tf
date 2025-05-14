@@ -69,7 +69,7 @@ module "eks-client-node" {
     sudo apt-get install -y terraform
 
     echo "Installing kubectl for Amazon EKS..."
-    curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.31.3/2024-12-12/bin/linux/amd64/kubectl
+    curl -O https://s3.ap-northeast-2.amazonaws.com/amazon-eks/1.31.3/2024-12-12/bin/linux/amd64/kubectl
     chmod +x ./kubectl
     mkdir -p "$HOME/bin"
     cp ./kubectl "$HOME/bin/kubectl"
@@ -130,7 +130,7 @@ module "iam" {
 ##############################################
 module "jenkins-server" {
   source            = "./../modules/jenkins-server"
-  ami_id            = var.ami_id
+  ami_id            = local.final_ami_id
   instance_type     = var.instance_type
   key_name          = var.key_name
   main-region       = var.main-region
@@ -141,7 +141,7 @@ module "jenkins-server" {
 
 module "terraform-node" {
   source            = "./../modules/terraform-node"
-  ami_id            = var.ami_id
+  ami_id            = local.final_ami_id
   instance_type     = var.instance_type
   key_name          = var.key_name
   main-region       = var.main-region
@@ -151,7 +151,7 @@ module "terraform-node" {
 
 module "maven-sonarqube-server" {
   source            = "./../modules/maven-sonarqube-server"
-  ami_id            = var.ami_id
+  ami_id            = local.final_ami_id
   instance_type     = var.instance_type
   key_name          = var.key_name
   security_group_id = module.eks-client-node.eks_client_sg
