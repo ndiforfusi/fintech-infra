@@ -18,56 +18,30 @@ module "eks" {
   cluster_name    = var.cluster_name
   cluster_version = "1.31"
 
-  enable_cluster_creator_admin_permissions = true
+  enable_cluster_creator_admin_permissions = true # Keep for legacy bootstrap
   cluster_endpoint_public_access           = true
-  bootstrap_self_managed_addons            = false
+  bootstrap_self_managed_addons            = true
 
-  vpc_id                   = var.vpc_id
-  subnet_ids               = var.private_subnets
-  control_plane_subnet_ids = var.private_subnets
+  vpc_id                                = var.vpc_id
+  subnet_ids                            = var.private_subnets
+  control_plane_subnet_ids              = var.private_subnets
   cluster_additional_security_group_ids = var.security_group_ids
 
-  create_cloudwatch_log_group = true
-  cluster_enabled_log_types   = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
-
   cluster_addons = {
-    coredns = {
-      most_recent = true
-    }
-    kube-proxy = {
-      most_recent = true
-    }
+    coredns = { most_recent = true }
+    kube-proxy = { most_recent = true }
     vpc-cni = {
       most_recent               = true
-      service_account_role_arn  = var.cni_role_arn
+      service_account_role_arn = var.cni_role_arn
     }
-    eks-pod-identity-agent = {
-      most_recent = true
-    }
-  }
-
-  eks_managed_node_group_defaults = {
-    ami_type       = "AL2023_x86_64_STANDARD"
-    instance_types = ["t2.medium"]
-    min_size       = 1
-    max_size       = 10
-    desired_size   = 1
-    iam_role_additional_policies = {
-      AmazonEKS_CNI_Policy = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-    }
-  }
-
-  eks_managed_node_groups = {
-    eks-node-group-2 = {
-      # Uses the defaults above
-    }
+    eks-pod-identity-agent = { most_recent = true }
   }
 
   access_entries = {
-    # ✅ Map 'fusi' user to eks-admins
-    fusi = {
-      kubernetes_groups = ["eks-admins"]
-      principal_arn     = "arn:aws:iam::999568710647:user/fusi"
+    terraform_user = {
+      # ✅ Use a custom group, NOT system:masters
+      kubernetes_groups = ["platform-admins"]
+      principal_arn     = "arn:aws:iam::999568710647:user/nfusi"
 
       policy_associations = [
         {
@@ -97,12 +71,27 @@ module "eks" {
   tags = local.common_tags
 }
 
-# -----------------------------------------
-# ✅ ClusterRoleBinding for eks-admins group
-# -----------------------------------------
-resource "kubernetes_cluster_role_binding" "eks_admins_binding" {
-  provider = kubernetes.eks
+# Bind terraform_user to cluster-admin
+resource "kubernetes_cluster_role_binding" "platform_admins_binding" {
+  metadata {
+    name = "platform-admins-binding"
+  }
 
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "cluster-admin"
+  }
+
+  subject {
+    kind      = "Group"
+    name      = "platform-admins"
+    api_group = "rbac.authorization.k8s.io"
+  }
+}
+
+# Bind github_runner to cluster-admin
+resource "kubernetes_cluster_role_binding" "eks_admins_binding" {
   metadata {
     name = "eks-admins-binding"
   }
@@ -119,6 +108,7 @@ resource "kubernetes_cluster_role_binding" "eks_admins_binding" {
     api_group = "rbac.authorization.k8s.io"
   }
 }
+
 
 ################################################################################
 # Kubernetes Namespaces

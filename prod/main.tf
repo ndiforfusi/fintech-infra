@@ -19,8 +19,9 @@ module "eks" {
   security_group_ids = [module.eks-client-node.eks_client_sg]
   vpc_id             = module.vpc.vpc_id
   private_subnets    = module.vpc.private_subnets
-  tags               = local.common_tags
-  env_name           = var.env_name
+
+  tags     = local.common_tags
+  env_name = var.env_name
 }
 
 
@@ -130,12 +131,16 @@ module "ecr" {
   tags           = local.common_tags
 }
 
-
 module "iam" {
-  source      = "./../modules/iam"
-  environment = var.env_name
-  tags        = local.common_tags
+  source            = "./../modules/iam"
+  environment       = var.env_name
+  aws_region        = var.aws_region
+  aws_account_id    = var.aws_account_id
+  eks_oidc_provider = local.eks_oidc_provider
+  cluster_name      = var.cluster_name
+  tags              = local.common_tags
 }
+
 
 
 ##############################################
