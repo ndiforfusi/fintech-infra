@@ -7,10 +7,10 @@ on:
   push:
     branches:
       - release
-      - pre-release
   pull_request:
     branches:
       - main
+      - release
   workflow_dispatch:
     inputs:
       environment:
