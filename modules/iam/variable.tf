@@ -21,14 +21,14 @@ variable "cluster_name" {
 }
 
 variable "eks_oidc_provider" {
-  description = "EKS OIDC provider (e.g. oidc.eks.us-east-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E)"
+  description = "EKS OIDC provider (e.g. oidc.eks.eu-west-1.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E)"
   type        = string
 }
 
 variable "tags" {
   description = "Common tags for the cluster resources"
   type        = map(string)
-  default     = {
+  default = {
     terraform = "true"
   }
 }

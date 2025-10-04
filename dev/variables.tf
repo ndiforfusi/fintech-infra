@@ -11,13 +11,13 @@ variable "aws_account_id" {
 variable "aws_region" {
   description = "AWS Region used for deployments"
   type        = string
-  default     = "us-east-2"
+  default     = "eu-west-1"
 }
 
 variable "main_region" {
   description = "Primary region for VPC and global resources"
   type        = string
-  default     = "us-east-2"
+  default     = "eu-west-1"
 }
 
 ################################################################################
@@ -34,7 +34,7 @@ variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
   default = {
-    devuct   = "fintech-app"
+    devuct    = "fintech-app"
     ManagedBy = "terraform"
   }
 }

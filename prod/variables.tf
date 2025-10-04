@@ -11,13 +11,13 @@ variable "aws_account_id" {
 variable "aws_region" {
   description = "AWS Region used for deployments"
   type        = string
-  default     = "us-east-2"
+  default     = "eu-west-1"
 }
 
 variable "main_region" {
   description = "Primary region for VPC and global resources"
   type        = string
-  default     = "us-east-2"
+  default     = "eu-west-1"
 }
 
 ################################################################################
@@ -107,7 +107,7 @@ variable "route53_zone_id" {
 variable "repositories" {
   description = "List of ECR repositories to create"
   type        = list(string)
-  default     = ["fintech-app","gateway"]
+  default     = ["fintech-app", "gateway"]
 }
 
 ################################################################################
