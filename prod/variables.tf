@@ -5,19 +5,19 @@
 variable "aws_account_id" {
   description = "AWS Account ID"
   type        = string
-  default     = "327019199684"
+  default     = "418272782718"
 }
 
 variable "aws_region" {
   description = "AWS Region used for deployments"
   type        = string
-  default     = "us-east-2"
+  default     = "eu-west-1"
 }
 
 variable "main_region" {
   description = "Primary region for VPC and global resources"
   type        = string
-  default     = "us-east-2"
+  default     = "eu-west-1"
 }
 
 ################################################################################
@@ -52,7 +52,7 @@ variable "cluster_name" {
 variable "rolearn" {
   description = "IAM role ARN to be added to the aws-auth configmap as admin"
   type        = string
-  default     = "arn:aws:iam::327019199684:role/terraform-create-role"
+  default     = "arn:aws:iam::418272782718:role/terraform-create-role"
 }
 
 
@@ -75,7 +75,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "EC2 Key Pair name for SSH access"
   type        = string
-  default     = "class39-dominion"
+  default     = "class390-dominion"
 }
 
 ################################################################################
@@ -85,19 +85,19 @@ variable "key_name" {
 variable "domain_name" {
   description = "Primary domain name for certificate issuance"
   type        = string
-  default     = "*.fusisoft.com"
+  default     = "*.shemphadglobalconcept.com"
 }
 
 variable "san_domains" {
   description = "SANs (Subject Alternative Names) for SSL certificate"
   type        = list(string)
-  default     = ["*.fusisoft.com"]
+  default     = ["*.shemphadglobalconcept.com"]
 }
 
 variable "route53_zone_id" {
   description = "Route 53 hosted zone ID for domain validation"
   type        = string
-  default     = "ZC7WDABJDII2"
+  default     = "Z0417665P4L85VA3F3F62"
 }
 
 ################################################################################
@@ -107,7 +107,7 @@ variable "route53_zone_id" {
 variable "repositories" {
   description = "List of ECR repositories to create"
   type        = list(string)
-  default     = ["fintech-app"]
+  default     = ["fintech-app", "gateway"]
 }
 
 ################################################################################
