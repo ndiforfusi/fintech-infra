@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-2"
+  region = "eu-west-1"
 }
 
 ########################################
@@ -49,8 +49,8 @@ resource "aws_iam_policy" "github_ecr_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow"
-        Action = "ecr:GetAuthorizationToken"
+        Effect   = "Allow"
+        Action   = "ecr:GetAuthorizationToken"
         Resource = "*"
       },
       {
@@ -77,8 +77,8 @@ resource "aws_iam_policy" "github_ecr_policy" {
         Resource = "arn:aws:ecr:${var.aws_region}:${var.aws_account_id}:*"
       },
       {
-        Effect = "Allow"
-        Action = "sts:TagSession"
+        Effect   = "Allow"
+        Action   = "sts:TagSession"
         Resource = "*"
       }
     ]

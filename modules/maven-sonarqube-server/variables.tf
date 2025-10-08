@@ -1,6 +1,6 @@
 variable "region" {
   description = "The AWS region to deploy to"
-  default     = "us-east-1"
+  default     = "eu-west-1"
 }
 
 variable "ami_id" {
@@ -22,7 +22,7 @@ variable "key_name" {
 variable "main_region" {
   description = "The AWS region to deploy resources"
   type        = string
-  default     = "us-west-2"
+  default     = "eu-west-1"
 }
 
 variable "security_group_id" {

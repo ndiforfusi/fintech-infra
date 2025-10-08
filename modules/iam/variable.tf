@@ -1,13 +1,13 @@
 variable "aws_account_id" {
   description = "AWS Account ID"
   type        = string
-  default     = "999568710647"
+  default     = "418272782718"
 }
 
 variable "aws_region" {
   description = "AWS Region"
   type        = string
-  default     = "us-east-1"
+  default     = "eu-west-1"
 }
 
 variable "environment" {
@@ -21,14 +21,14 @@ variable "cluster_name" {
 }
 
 variable "eks_oidc_provider" {
-  description = "EKS OIDC provider (e.g. oidc.eks.us-east-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E)"
+  description = "EKS OIDC provider (e.g. oidc.eks.eu-west-1.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E)"
   type        = string
 }
 
 variable "tags" {
   description = "Common tags for the cluster resources"
   type        = map(string)
-  default     = {
+  default = {
     terraform = "true"
   }
 }
