@@ -1,4 +1,4 @@
-terraform {
+cluster_certificate_authority_dataterraform {
   required_version = ">=0.12.0"
   backend "s3" {
     key            = "prod/terraform.state"

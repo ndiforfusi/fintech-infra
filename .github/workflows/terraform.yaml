@@ -2,7 +2,8 @@ permissions:
   id-token: write # Required for OIDC authentication
   contents: read  # Required for actions/checkout
 
-name: Terraform-AWS-Infra-Deployment
+name: Terraform-AWS-Infra-Deploymentclear
+
 on:
   push:
     branches:
