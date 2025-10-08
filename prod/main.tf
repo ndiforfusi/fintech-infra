@@ -238,3 +238,4 @@ module "maven-sonarqube-server" {
 # }
 
 
+clear
