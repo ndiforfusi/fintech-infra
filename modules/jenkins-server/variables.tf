@@ -19,7 +19,7 @@ variable "key_name" {
 variable "main-region" {
   description = "The AWS region to deploy resources"
   type        = string
-  default     = "us-west-2"
+  default     = "us-east-2"
 }
 
 variable "security_group_id" {
@@ -31,3 +31,4 @@ variable "subnet_id" {
   description = "The subnet ID where the instance will be deployed"
   type        = string
 }
+

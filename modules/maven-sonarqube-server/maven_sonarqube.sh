@@ -231,3 +231,4 @@ echo "ALL DONE! SonarQube setup completed successfully."
 echo "If the service exits on first boot, re-login (to apply limits) and run: sudo systemctl restart sonar"
 echo "Open a new SSH session or run: source ~/.bashrc"
 echo "Test Maven: mvn -version"
+

@@ -59,7 +59,7 @@ Name: terraform-1.5.0
 
 Still install AWS CLI system-wide:
 
-# On the Jenkins agent (Amazon Linux 2/2023)
+# On the Jenkins agent (Amazon Linux 2/2024)
 sudo yum -y install unzip || sudo dnf -y install unzip
 curl -LO "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
 unzip -q awscli-exe-linux-x86_64.zip

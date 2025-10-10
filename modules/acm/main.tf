@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-east-2"
 }
 
-resource "aws_acm_certificate" "fusisoft_cert" {
+resource "aws_acm_certificate" "shemphadglobalconcept.com_cert" {
   domain_name       = var.domain_name
   subject_alternative_names = var.san_domains
   validation_method = "DNS"
@@ -14,7 +14,7 @@ resource "aws_acm_certificate" "fusisoft_cert" {
 
 resource "aws_route53_record" "cert_validation" {
   for_each = {
-    for dvo in aws_acm_certificate.fusisoft_cert.domain_validation_options :
+    for dvo in aws_acm_certificate.shemphadglobalconcept.comt_cert.domain_validation_options :
     dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
