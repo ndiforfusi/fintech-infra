@@ -1,6 +1,6 @@
 permissions:
-  id-token: write # Required for OIDC authentication
-  contents: read  # Required for actions/checkout
+  id-token: write
+  contents: read
 
 name: Terraform-AWS-Infra-Deployment
 on:
@@ -50,17 +50,28 @@ jobs:
       - name: Verify working directory
         run: |
           echo "Working in ./${{ env.TF_DIR }}"
-          ls -l ./${{ env.TF_DIR }}
+          ls -la ./${{ env.TF_DIR }}
 
-      - name: Terraform fmt check
+      - name: Terraform Format Check
         working-directory: ${{ env.TF_DIR }}
-        run: terraform fmt -check
+        run: |
+          # Check formatting first
+          if ! terraform fmt -check; then
+            echo "❌ Terraform files are not properly formatted."
+            echo "Run 'terraform fmt' in the ${{ env.TF_DIR }} directory to fix formatting."
+            exit 1
+          fi
+          echo "✅ Terraform formatting is correct"
 
-      - name: Terraform init
+      - name: Terraform Init
         working-directory: ${{ env.TF_DIR }}
         run: terraform init -upgrade -backend-config="key=${{ env.TF_ENV }}/terraform.tfstate"
 
-      - name: Terraform plan
+      - name: Terraform Validate
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform validate
+
+      - name: Terraform Plan
         working-directory: ${{ env.TF_DIR }}
         run: terraform plan -lock=false
 
@@ -89,7 +100,7 @@ jobs:
         with:
           terraform_version: "1.5.0"
 
-      - name: Terraform init
+      - name: Terraform Init
         working-directory: ${{ env.TF_DIR }}
         run: terraform init -backend-config="key=${{ env.TF_ENV }}/terraform.tfstate"
 
