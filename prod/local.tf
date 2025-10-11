@@ -2,8 +2,7 @@
 data "aws_ami" "ubuntu_latest" {
   count       = var.ami_id == "" ? 1 : 0
   most_recent = true
-  owners      = ["099720109477"] # Canonical
-
+  owners      = ["147997123299"] # Canonical
   filter {
     name   = "name"
     values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
