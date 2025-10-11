@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - release
-      - pre-release
+      - main
   pull_request:
     branches:
       - main
