@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     bucket         = "infra-chide"
-    key            = "prod/terraform.tfstate"   # use this .tfstate (your file had ".state")
+    key            = "prod/terraform.tfstate"
     region         = "us-east-2"
     dynamodb_table = "infra-chide_db"
     encrypt        = true
