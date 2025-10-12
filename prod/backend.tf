@@ -1,9 +1,11 @@
 terraform {
-  required_version = ">=0.12.0"
+  required_version = ">= 1.5.0"
+
   backend "s3" {
-    key            = "prod/terraform.state"
     bucket         = "infra-chide"
+    key            = "tooling/terraform.tfstate"   # use .tfstate (your file had ".state")
     region         = "us-east-2"
     dynamodb_table = "infra-chide_db"
+    encrypt        = true
   }
 }
