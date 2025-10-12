@@ -5,7 +5,7 @@
 variable "aws_account_id" {
   description = "AWS Account ID"
   type        = string
-  default     = "999568710647"
+  default     = "147997123299"
 }
 
 variable "aws_region" {
@@ -46,13 +46,13 @@ variable "tags" {
 variable "cluster_name" {
   description = "Name of the EKS cluster"
   type        = string
-  default     = "prod-dominion-cluster"
+  default     = "prod-Chideraa-cluster"
 }
 
 variable "rolearn" {
   description = "IAM role ARN to be added to the aws-auth configmap as admin"
   type        = string
-  default     = "arn:aws:iam::999568710647:role/terraform-create-role"
+  default     = "arn:aws:iam::147997123299:user/Chideraa:role/terraform-create-role"
 }
 
 
