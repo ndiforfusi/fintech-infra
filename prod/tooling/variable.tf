@@ -36,7 +36,7 @@ variable "kms_key_id" {
 variable "tags" {
   description = "Common tags"
   type        = map(string)
-  default     = {
+  default = {
     Project = "terraform-backend-bootstrap"
     Managed = "terraform"
   }
