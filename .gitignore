@@ -28,3 +28,8 @@ terraform.rc
 #Ignore visual studio workspace
 *.code-workspace
 
+.env
+*.tfvars
+*.pem
+*.key
+*.log
