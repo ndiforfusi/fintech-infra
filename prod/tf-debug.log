@@ -14322,3 +14322,115 @@
 2025-10-12T00:00:24.484-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/tls/versions
 2025-10-12T00:00:24.670-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/cloudinit/versions
 2025-10-12T00:00:24.856-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/null/versions
+2025-10-12T00:27:45.237-0600 [INFO]  Terraform version: 1.12.0
+2025-10-12T00:27:45.238-0600 [DEBUG] using github.com/hashicorp/go-tfe v1.74.1
+2025-10-12T00:27:45.238-0600 [DEBUG] using github.com/hashicorp/hcl/v2 v2.23.1-0.20250203194505-ba0759438da2
+2025-10-12T00:27:45.238-0600 [DEBUG] using github.com/hashicorp/terraform-svchost v0.1.1
+2025-10-12T00:27:45.238-0600 [DEBUG] using github.com/zclconf/go-cty v1.16.2
+2025-10-12T00:27:45.238-0600 [INFO]  Go runtime version: go1.24.2
+2025-10-12T00:27:45.238-0600 [INFO]  CLI args: []string{"C:\\Program Files\\Terraform\\terraform.exe", "init", "-reconfigure"}
+2025-10-12T00:27:45.242-0600 [DEBUG] Attempting to open CLI config file: C:\Users\miche\AppData\Roaming\terraform.rc
+2025-10-12T00:27:45.242-0600 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2025-10-12T00:27:45.243-0600 [DEBUG] ignoring non-existing provider search directory terraform.d/plugins
+2025-10-12T00:27:45.243-0600 [DEBUG] ignoring non-existing provider search directory C:\Users\miche\AppData\Roaming\terraform.d\plugins
+2025-10-12T00:27:45.245-0600 [DEBUG] ignoring non-existing provider search directory C:\Users\miche\AppData\Roaming\HashiCorp\Terraform\plugins
+2025-10-12T00:27:45.245-0600 [INFO]  CLI command args: []string{"init", "-reconfigure"}
+2025-10-12T00:27:50.418-0600 [DEBUG] checking for provisioner in "."
+2025-10-12T00:27:50.418-0600 [DEBUG] checking for provisioner in "C:\\Program Files\\Terraform"
+2025-10-12T00:27:50.419-0600 [DEBUG] backend-s3.aws-base: Resolving credentials provider: tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate
+2025-10-12T00:27:50.419-0600 [DEBUG] backend-s3.aws-base: Using profile: tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate tf_aws.profile.source=envvar tf_aws.profile=Chideraa
+2025-10-12T00:27:50.419-0600 [DEBUG] backend-s3.aws-base: Loading configuration: tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate
+2025-10-12T00:27:50.419-0600 [DEBUG] backend-s3.aws-base: Retrieving credentials: tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate
+2025-10-12T00:27:50.419-0600 [INFO]  backend-s3.aws-base: Retrieved credentials: tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate tf_aws.credentials_source="SharedConfigCredentials: C:\Users\miche\.aws\credentials"
+2025-10-12T00:27:50.419-0600 [DEBUG] backend-s3.aws-base: Loading configuration: tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate
+2025-10-12T00:27:50.419-0600 [DEBUG] backend-s3.aws-base: Retrieving caller identity from STS: tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate
+2025-10-12T00:27:50.421-0600 [DEBUG] backend-s3.aws-base: HTTP Request Sent: aws.region=us-east-2 rpc.method=GetCallerIdentity rpc.service=STS rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate http.request.header.content_type=application/x-www-form-urlencoded http.request_content_length=43 http.request.header.authorization="AWS4-HMAC-SHA256 Credential=AKIA************3APN/20251012/us-east-2/sts/aws4_request, SignedHeaders=amz-sdk-invocation-id;amz-sdk-request;content-length;content-type;host;x-amz-date, Signature=*****" http.request.header.x_amz_date=20251012T062750Z http.request.header.amz_sdk_invocation_id=c4d510a5-6acb-4bcb-b6db-3356db415557
+  http.request.body=
+  | Action=GetCallerIdentity&Version=2011-06-15
+   http.method=POST http.url=https://sts.us-east-2.amazonaws.com/ net.peer.name=sts.us-east-2.amazonaws.com http.user_agent="APN/1.0 HashiCorp/1.0 Terraform/1.12.0 (+https://www.terraform.io) aws-sdk-go-v2/1.36.0 ua/2.1 os/windows lang/go#1.24.2 md/GOOS#windows md/GOARCH#386 api/sts#1.33.12" http.request.header.amz_sdk_request="attempt=1; max=5"
+2025-10-12T00:27:50.868-0600 [DEBUG] backend-s3.aws-base: HTTP Response Received: aws.region=us-east-2 rpc.method=GetCallerIdentity rpc.service=STS rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate http.response.header.content_type=text/xml http.response.header.date="Sun, 12 Oct 2025 06:27:51 GMT"
+  http.response.body=
+  | <GetCallerIdentityResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
+  |   <GetCallerIdentityResult>
+  |     <Arn>arn:aws:iam::147997123299:user/Chideraa</Arn>
+  |     <UserId>AIDA*************ONEB</UserId>
+  |     <Account>147997123299</Account>
+  |   </GetCallerIdentityResult>
+  |   <ResponseMetadata>
+  |     <RequestId>b9f8c435-e2d2-41c8-9377-c806275d96bd</RequestId>
+  |   </ResponseMetadata>
+  | </GetCallerIdentityResponse>
+   http.duration=446 http.status_code=200 http.response_content_length=405 http.response.header.x_amzn_requestid=b9f8c435-e2d2-41c8-9377-c806275d96bd http.response.header.x_amz_sts_extended_request_id=MTp1cy1lYXN0LTI6MTc2MDI1MDQ3MTU1MDpSOktqOVpDU3Vm
+2025-10-12T00:27:50.868-0600 [INFO]  backend-s3.aws-base: Retrieved caller identity from STS: tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate
+2025-10-12T00:27:50.868-0600 [DEBUG] backend-s3.aws-base: Retrieving caller identity from STS: tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate
+2025-10-12T00:27:50.868-0600 [DEBUG] backend-s3.aws-base: HTTP Request Sent: aws.region=us-east-2 rpc.method=GetCallerIdentity rpc.service=STS rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate http.user_agent="APN/1.0 HashiCorp/1.0 Terraform/1.12.0 (+https://www.terraform.io) aws-sdk-go-v2/1.36.0 ua/2.1 os/windows lang/go#1.24.2 md/GOOS#windows md/GOARCH#386 api/sts#1.33.12" http.request.header.authorization="AWS4-HMAC-SHA256 Credential=AKIA************3APN/20251012/us-east-2/sts/aws4_request, SignedHeaders=amz-sdk-invocation-id;amz-sdk-request;content-length;content-type;host;x-amz-date, Signature=*****" http.request.header.amz_sdk_invocation_id=bcf28b25-255a-4f90-a48b-1fbc4999604d http.request.header.amz_sdk_request="attempt=1; max=5" http.request.header.content_type=application/x-www-form-urlencoded
+  http.request.body=
+  | Action=GetCallerIdentity&Version=2011-06-15
+   net.peer.name=sts.us-east-2.amazonaws.com http.request_content_length=43 http.request.header.x_amz_date=20251012T062750Z http.method=POST http.url=https://sts.us-east-2.amazonaws.com/
+2025-10-12T00:27:50.962-0600 [DEBUG] backend-s3.aws-base: HTTP Response Received: aws.region=us-east-2 rpc.method=GetCallerIdentity rpc.service=STS rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate http.response.header.x_amzn_requestid=c663f4af-13c1-4e0e-99ea-ee886cae39a5 http.response.header.x_amz_sts_extended_request_id=MTp1cy1lYXN0LTI6MTc2MDI1MDQ3MTYxMzpSOmtlbTN5NXBU http.response.header.content_type=text/xml http.response.header.date="Sun, 12 Oct 2025 06:27:51 GMT"
+  http.response.body=
+  | <GetCallerIdentityResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
+  |   <GetCallerIdentityResult>
+  |     <Arn>arn:aws:iam::147997123299:user/Chideraa</Arn>
+  |     <UserId>AIDA*************ONEB</UserId>
+  |     <Account>147997123299</Account>
+  |   </GetCallerIdentityResult>
+  |   <ResponseMetadata>
+  |     <RequestId>c663f4af-13c1-4e0e-99ea-ee886cae39a5</RequestId>
+  |   </ResponseMetadata>
+  | </GetCallerIdentityResponse>
+   http.duration=93 http.status_code=200 http.response_content_length=405
+2025-10-12T00:27:50.962-0600 [INFO]  backend-s3.aws-base: Retrieved caller identity from STS: tf_backend.operation=Configure tf_backend.req_id=8af143e9-3002-6818-3d59-e14603161e9d tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate
+2025-10-12T00:27:50.973-0600 [DEBUG] backend-s3: HTTP Request Sent: aws.region=us-east-2 aws.s3.bucket=infra-chide rpc.method=ListObjectsV2 rpc.service=S3 rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Workspaces tf_backend.req_id=6bc59ca8-f270-5002-ae32-55abea7b2097 tf_backend.s3.bucket=infra-chide tf_backend.workspace-prefix=env:/ http.url="https://infra-chide.s3.us-east-2.amazonaws.com/?list-type=2&max-keys=1000&prefix=env%3A%2F" net.peer.name=infra-chide.s3.us-east-2.amazonaws.com http.user_agent="APN/1.0 HashiCorp/1.0 Terraform/1.12.0 (+https://www.terraform.io) aws-sdk-go-v2/1.36.0 ua/2.1 os/windows lang/go#1.24.2 md/GOOS#windows md/GOARCH#386 api/s3#1.75.2 m/C" http.request.header.authorization="AWS4-HMAC-SHA256 Credential=AKIA************3APN/20251012/us-east-2/s3/aws4_request, SignedHeaders=accept-encoding;amz-sdk-invocation-id;amz-sdk-request;host;x-amz-content-sha256;x-amz-date, Signature=*****" http.request.header.amz_sdk_request="attempt=1; max=5" http.request.header.amz_sdk_invocation_id=4ecce353-eef6-4c9e-bb04-b9e64d0fbcc3 http.request.body="" http.method=GET http.request.header.accept_encoding=identity http.request.header.x_amz_content_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 http.request.header.x_amz_date=20251012T062750Z
+2025-10-12T00:27:51.259-0600 [DEBUG] backend-s3: HTTP Response Received: aws.region=us-east-2 aws.s3.bucket=infra-chide rpc.method=ListObjectsV2 rpc.service=S3 rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Workspaces tf_backend.req_id=6bc59ca8-f270-5002-ae32-55abea7b2097 tf_backend.s3.bucket=infra-chide tf_backend.workspace-prefix=env:/ http.response.header.x_amz_bucket_region=us-east-2 http.response.header.server=AmazonS3
+  http.response.body=
+  | <?xml version="1.0" encoding="UTF-8"?>
+  | <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>infra-chide</Name><Prefix>env:/</Prefix><KeyCount>0</KeyCount><MaxKeys>1000</MaxKeys><IsTruncated>false</IsTruncated></ListBucketResult>
+   http.duration=268 http.response.header.x_amz_id_2="fQmO7lUjVrkx14LR8RhiLRhXLspaQXguUyridAaIxSAfL3kUtHO7NkslbxjQS1C6lMHEZT+C28M=" http.response.header.date="Sun, 12 Oct 2025 06:27:52 GMT" http.response.header.content_type=application/xml http.status_code=200 http.response.header.x_amz_request_id=MAVBYKVXF965RYG4
+2025-10-12T00:27:56.094-0600 [DEBUG] checking for provisioner in "."
+2025-10-12T00:27:56.094-0600 [DEBUG] checking for provisioner in "C:\\Program Files\\Terraform"
+2025-10-12T00:27:56.094-0600 [DEBUG] backend-s3: HTTP Request Sent: aws.region=us-east-2 aws.s3.bucket=infra-chide rpc.method=ListObjectsV2 rpc.service=S3 rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Workspaces tf_backend.req_id=8b210129-2fc4-7396-deb9-723454f8f499 tf_backend.s3.bucket=infra-chide tf_backend.workspace-prefix=env:/ http.request.body="" http.user_agent="APN/1.0 HashiCorp/1.0 Terraform/1.12.0 (+https://www.terraform.io) aws-sdk-go-v2/1.36.0 ua/2.1 os/windows lang/go#1.24.2 md/GOOS#windows md/GOARCH#386 api/s3#1.75.2 m/C" http.request.header.authorization="AWS4-HMAC-SHA256 Credential=AKIA************3APN/20251012/us-east-2/s3/aws4_request, SignedHeaders=accept-encoding;amz-sdk-invocation-id;amz-sdk-request;host;x-amz-content-sha256;x-amz-date, Signature=*****" http.request.header.x_amz_date=20251012T062756Z http.request.header.amz_sdk_invocation_id=2d769a31-9199-4edf-8624-cba2d815b3d8 http.request.header.accept_encoding=identity http.request.header.amz_sdk_request="attempt=1; max=5" http.request.header.x_amz_content_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 http.method=GET http.url="https://infra-chide.s3.us-east-2.amazonaws.com/?list-type=2&max-keys=1000&prefix=env%3A%2F" net.peer.name=infra-chide.s3.us-east-2.amazonaws.com
+2025-10-12T00:27:56.161-0600 [DEBUG] backend-s3: HTTP Response Received: aws.region=us-east-2 aws.s3.bucket=infra-chide rpc.method=ListObjectsV2 rpc.service=S3 rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Workspaces tf_backend.req_id=8b210129-2fc4-7396-deb9-723454f8f499 tf_backend.s3.bucket=infra-chide tf_backend.workspace-prefix=env:/ http.response.header.date="Sun, 12 Oct 2025 06:27:57 GMT" http.response.header.x_amz_bucket_region=us-east-2 http.response.header.content_type=application/xml http.response.header.server=AmazonS3
+  http.response.body=
+  | <?xml version="1.0" encoding="UTF-8"?>
+  | <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>infra-chide</Name><Prefix>env:/</Prefix><KeyCount>0</KeyCount><MaxKeys>1000</MaxKeys><IsTruncated>false</IsTruncated></ListBucketResult>
+   http.duration=67 http.status_code=200 http.response.header.x_amz_id_2=CpD/mUo4r9kXogXkEv6xOoNQ7Vmf8A0PKBbIkPi3wj5QbPWM9sPDx2A96put47/9eyJ/IEzxEQQ= http.response.header.x_amz_request_id=A0X91H7ZGTWA7GB3
+2025-10-12T00:27:56.162-0600 [INFO]  backend-s3: Downloading remote state: tf_backend.operation=Get tf_backend.req_id=0d8ebc40-af07-0454-0784-add651bfa812 tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate
+2025-10-12T00:27:56.162-0600 [DEBUG] backend-s3: HTTP Request Sent: aws.region=us-east-2 aws.s3.bucket=infra-chide aws.s3.key=fintech-infra/terraform.tfstate rpc.method=HeadObject rpc.service=S3 rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Get tf_backend.req_id=0d8ebc40-af07-0454-0784-add651bfa812 tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate http.method=HEAD http.user_agent="APN/1.0 HashiCorp/1.0 Terraform/1.12.0 (+https://www.terraform.io) aws-sdk-go-v2/1.36.0 ua/2.1 os/windows lang/go#1.24.2 md/GOOS#windows md/GOARCH#386 api/s3#1.75.2" http.request.header.x_amz_date=20251012T062756Z http.request.header.accept_encoding=identity http.request.header.amz_sdk_invocation_id=d26c90ac-0914-43c1-9b92-3a1632e03ff6 http.request.header.amz_sdk_request="attempt=1; max=5" http.request.header.x_amz_content_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 http.request.body="" http.url=https://infra-chide.s3.us-east-2.amazonaws.com/fintech-infra/terraform.tfstate net.peer.name=infra-chide.s3.us-east-2.amazonaws.com http.request.header.authorization="AWS4-HMAC-SHA256 Credential=AKIA************3APN/20251012/us-east-2/s3/aws4_request, SignedHeaders=accept-encoding;amz-sdk-invocation-id;amz-sdk-request;host;x-amz-content-sha256;x-amz-date, Signature=*****"
+2025-10-12T00:27:56.220-0600 [DEBUG] backend-s3: HTTP Response Received: aws.region=us-east-2 aws.s3.bucket=infra-chide aws.s3.key=fintech-infra/terraform.tfstate rpc.method=HeadObject rpc.service=S3 rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Get tf_backend.req_id=0d8ebc40-af07-0454-0784-add651bfa812 tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate http.response.header.content_type=application/xml http.response.header.date="Sun, 12 Oct 2025 06:27:56 GMT" http.response.header.server=AmazonS3 http.response.body="" http.duration=57 http.status_code=404 http.response.header.x_amz_request_id=A0XC6JE1JJJWREB4 http.response.header.x_amz_id_2="PcfVf0yItJyU/yo+j+Q10q6zkNkxENJuuUypeUTfAk1CGOF7wJwlkTltlupwOIvkzuCxlFd2aNQ="
+2025-10-12T00:27:56.220-0600 [DEBUG] backend-s3: request failed with unretryable error https response error StatusCode: 404, RequestID: A0XC6JE1JJJWREB4, HostID: PcfVf0yItJyU/yo+j+Q10q6zkNkxENJuuUypeUTfAk1CGOF7wJwlkTltlupwOIvkzuCxlFd2aNQ=, NotFound: : aws.region=us-east-2 aws.s3.bucket=infra-chide aws.s3.key=fintech-infra/terraform.tfstate rpc.method=HeadObject rpc.service=S3 rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_backend.operation=Get tf_backend.req_id=0d8ebc40-af07-0454-0784-add651bfa812 tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate
+2025-10-12T00:27:56.221-0600 [DEBUG] backend-s3: HTTP Request Sent: aws.dynamodb.consistent_read=true aws.dynamodb.projection="LockID, Digest" aws.dynamodb.table_names=["infra-chide_db"] aws.region=us-east-2 db.system=dynamodb rpc.method=GetItem rpc.service=DynamoDB rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Get tf_backend.req_id=0d8ebc40-af07-0454-0784-add651bfa812 tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate http.method=POST net.peer.name=dynamodb.us-east-2.amazonaws.com http.user_agent="APN/1.0 HashiCorp/1.0 Terraform/1.12.0 (+https://www.terraform.io) aws-sdk-go-v2/1.36.0 ua/2.1 os/windows lang/go#1.24.2 md/GOOS#windows md/GOARCH#386 api/dynamodb#1.39.8" http.request_content_length=165 http.request.header.amz_sdk_invocation_id=95cdf275-df24-478e-87d6-b316e9d8a636 http.request.header.content_type=application/x-amz-json-1.0 http.request.header.amz_sdk_request="attempt=1; max=5" http.request.header.x_amz_date=20251012T062756Z http.url=https://dynamodb.us-east-2.amazonaws.com/ http.request.header.authorization="AWS4-HMAC-SHA256 Credential=AKIA************3APN/20251012/us-east-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;amz-sdk-invocation-id;amz-sdk-request;content-length;content-type;host;x-amz-date;x-amz-target, Signature=*****" http.request.header.accept_encoding=identity http.request.header.x_amz_target=DynamoDB_20120810.GetItem
+  http.request.body=
+  | {"ConsistentRead":true,"Key":{"LockID":{"S":"infra-chide/fintech-infra/terraform.tfstate-md5"}},"ProjectionExpression":"LockID, Digest","TableName":"infra-chide_db"}
+  
+2025-10-12T00:27:56.528-0600 [DEBUG] backend-s3: HTTP Response Received: aws.dynamodb.consistent_read=true aws.dynamodb.projection="LockID, Digest" aws.dynamodb.table_names=["infra-chide_db"] aws.region=us-east-2 db.system=dynamodb rpc.method=GetItem rpc.service=DynamoDB rpc.system=aws-api tf_aws.sdk=aws-sdk-go-v2 tf_aws.signing_region="" tf_backend.operation=Get tf_backend.req_id=0d8ebc40-af07-0454-0784-add651bfa812 tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate http.response.header.x_amz_crc32=2745614147 http.status_code=200 http.response_content_length=2 http.response.header.content_type=application/x-amz-json-1.0 http.response.header.connection=keep-alive http.response.header.x_amzn_requestid=PGM0MAMLBVKI7ABQE9SCO6G9QVVV4KQNSO5AEMVJF66Q9ASUAAJG http.response.header.server=Server http.response.header.date="Sun, 12 Oct 2025 06:27:57 GMT"
+  http.response.body=
+  | {}
+   http.duration=304
+2025-10-12T00:27:56.528-0600 [WARN]  backend-s3: failed to fetch state MD5: tf_backend.operation=Get tf_backend.req_id=0d8ebc40-af07-0454-0784-add651bfa812 tf_backend.s3.bucket=infra-chide tf_backend.s3.path=fintech-infra/terraform.tfstate error="invalid md5"
+2025-10-12T00:27:56.531-0600 [DEBUG] Module installer: begin acm
+2025-10-12T00:27:56.534-0600 [DEBUG] Module installer: begin aws_alb_controller
+2025-10-12T00:27:56.535-0600 [DEBUG] Module installer: begin ecr
+2025-10-12T00:27:56.537-0600 [DEBUG] Module installer: begin eks
+2025-10-12T00:27:56.540-0600 [DEBUG] Module installer: begin eks.eks
+2025-10-12T00:27:56.573-0600 [DEBUG] Module installer: begin eks.eks.eks_managed_node_group
+2025-10-12T00:27:56.586-0600 [DEBUG] Module installer: begin eks.eks.eks_managed_node_group.user_data
+2025-10-12T00:27:56.589-0600 [DEBUG] Module installer: begin eks.eks.fargate_profile
+2025-10-12T00:27:56.594-0600 [DEBUG] Module installer: begin eks.eks.kms
+2025-10-12T00:27:56.603-0600 [DEBUG] Module installer: begin eks.eks.self_managed_node_group
+2025-10-12T00:27:56.616-0600 [DEBUG] Module installer: begin eks.eks.self_managed_node_group.user_data
+2025-10-12T00:27:56.616-0600 [DEBUG] Module installer: begin eks-client-node
+2025-10-12T00:27:56.616-0600 [DEBUG] Module installer: begin github-self-hosted-runner
+2025-10-12T00:27:56.616-0600 [DEBUG] Module installer: begin iam
+2025-10-12T00:27:56.616-0600 [DEBUG] Module installer: begin maven-sonarqube-server
+2025-10-12T00:27:56.626-0600 [DEBUG] Module installer: begin vpc
+2025-10-12T00:27:56.628-0600 [DEBUG] Module installer: begin vpc.vpc
+2025-10-12T00:27:56.696-0600 [DEBUG] Service discovery for registry.terraform.io at https://registry.terraform.io/.well-known/terraform.json
+2025-10-12T00:27:56.847-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/kubernetes/versions
+2025-10-12T00:27:56.950-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/tls/versions
+2025-10-12T00:27:57.095-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/time/versions
+2025-10-12T00:27:57.206-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/null/versions
+2025-10-12T00:27:57.358-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/cloudinit/versions
+2025-10-12T00:27:57.527-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/random/versions
+2025-10-12T00:27:57.635-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/aws/versions
+2025-10-12T00:27:57.749-0600 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/helm/versions
