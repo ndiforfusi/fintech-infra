@@ -5,12 +5,12 @@ variable "region" {
 }
 
 variable "bucket_name" {
-  description = "classproject-bucket"
+  description = "bucket for-Terraform state"
   type        = string
 }
 
 variable "dynamodb_table_name" {
-  description = "project"
+  description = "for logging"
   type        = string
   default     = "terraform-locks"
 }
