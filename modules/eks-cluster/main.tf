@@ -83,9 +83,9 @@ module "eks" {
     ami_type       = "AL2023_x86_64_STANDARD"
     instance_types = ["t3.medium"]
 
-    min_size     = 3
-    max_size     = 5
-    desired_size = 3
+    min_size     = 4
+    max_size     = 6
+    desired_size = 4
 
     iam_role_additional_policies = {
       AmazonEKSWorkerNodePolicy          = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
@@ -103,25 +103,15 @@ module "eks" {
 
   ##############################################
   # Access entries (IAM Identity Center or user/role mapping)
+  # Removed duplicate entry for ope1 user
   ##############################################
   access_entries = {
-    fusi = {
-      kubernetes_groups = ["eks-admins"]
-      principal_arn     = "arn:aws:iam::999568710647:user/nfusi"
-      policy_associations = [
-        {
-          policy_arn  = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-          access_scope = { type = "cluster" }
-        }
-      ]
-    }
-
     github_runner = {
       kubernetes_groups = ["eks-admins"]
-      principal_arn     = "arn:aws:iam::999568710647:role/github-runner-ssm-role"
+      principal_arn     = "arn:aws:iam::043310666010:role/github-runner-ssm-role"
       policy_associations = [
         {
-          policy_arn  = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
           access_scope = { type = "cluster" }
         }
       ]
