@@ -103,25 +103,15 @@ module "eks" {
 
   ##############################################
   # Access entries (IAM Identity Center or user/role mapping)
+  # Removed duplicate entry for ope1 user
   ##############################################
   access_entries = {
-    ope1 = {
-      kubernetes_groups = ["eks-admins"]
-      principal_arn     = "arn:aws:iam::043310666010:user/ope1"
-      policy_associations = [
-        {
-          policy_arn  = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-          access_scope = { type = "cluster" }
-        }
-      ]
-    }
-
     github_runner = {
       kubernetes_groups = ["eks-admins"]
       principal_arn     = "arn:aws:iam::043310666010:role/github-runner-ssm-role"
       policy_associations = [
         {
-          policy_arn  = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
           access_scope = { type = "cluster" }
         }
       ]
