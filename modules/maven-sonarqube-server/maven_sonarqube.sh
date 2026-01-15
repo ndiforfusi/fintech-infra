@@ -1,181 +1,159 @@
+
 #!/bin/bash
 set -euo pipefail
 
-# ===== VARIABLES =====
+# ===== VERSIONS / VARS =====
 MAVEN_VERSION="3.9.10"
 SONARQUBE_VERSION="10.5.1.90531"
 POSTGRES_USER="ddsonar"
 POSTGRES_DB="ddsonarqube"
 POSTGRES_PASSWORD="Team@123"
+SONAR_USER="ddsonar"
+SONAR_GROUP="ddsonar"
+SONAR_DIR="/opt/sonarqube"
+JAVA_PKG="openjdk-17-jdk"
 
-# ===== BETTER TRAP FOR DEBUGGING =====
 trap 'echo " ERROR at line $LINENO"; exit 1' ERR
 
 echo "=========================================="
 echo "  Starting SonarQube & dependencies setup"
 echo "=========================================="
 
-# ===== UPDATE SYSTEM =====
+# FIX: Remove any broken legacy repo files causing 'apt-get update' to fail
+echo "=== Cleaning up broken repository lists ==="
+sudo rm -f /etc/apt/sources.list.d/pgdg.list
+sudo rm -f /usr/share/keyrings/postgresql.gpg
+
 echo "=== Updating system packages ==="
 sudo apt-get update -y
 
-# ===== INSTALL BASE PACKAGES =====
 echo "=== Installing base dependencies ==="
-sudo apt-get install -y wget unzip curl zip gnupg lsb-release openjdk-17-jdk tar
+sudo apt-get install -y wget unzip curl zip gnupg lsb-release "$JAVA_PKG" tar
 
-# ===== INSTALL kubectl =====
+# ----- kubectl -----
 install_kubectl() {
   if ! command -v kubectl &>/dev/null; then
     echo "Installing kubectl..."
     curl -fsSL -o kubectl "https://s3.us-west-2.amazonaws.com/amazon-eks/1.31.7/2025-04-17/bin/linux/amd64/kubectl"
     chmod +x ./kubectl
     sudo mv ./kubectl /usr/local/bin/kubectl
-  else
-    echo " kubectl already installed."
   fi
-  echo "Verifying kubectl..."
-  kubectl version --client
 }
 
-# ===== INSTALL AWS CLI =====
+# ----- AWS CLI v2 -----
 install_aws_cli() {
   if ! command -v aws &>/dev/null; then
     echo "Installing AWS CLI v2..."
     curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip
-    unzip -o awscliv2.zip
+    unzip -qo awscliv2.zip
     sudo ./aws/install
     rm -rf awscliv2.zip aws
-  else
-    echo " AWS CLI already installed."
-    aws --version
   fi
 }
 
-# ===== INSTALL MAVEN =====
+# ----- Maven -----
 install_maven() {
-  if ! command -v mvn &>/dev/null || [[ "$(mvn -version | grep 'Apache Maven')" != *"$MAVEN_VERSION"* ]]; then
+  if ! command -v mvn &>/dev/null; then
     echo "Installing Maven $MAVEN_VERSION..."
     MAVEN_TAR="apache-maven-${MAVEN_VERSION}-bin.tar.gz"
-    MAVEN_URL="https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/${MAVEN_TAR}"
-
-    echo "Downloading Maven from $MAVEN_URL..."
+    MAVEN_URL="https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/${MAVEN_TAR}"
     wget -nv "$MAVEN_URL" -O "$MAVEN_TAR"
-
-    if [ ! -f "$MAVEN_TAR" ]; then
-      echo " Maven download failed! File $MAVEN_TAR not found."
-      exit 1
-    fi
-
-    echo "Extracting Maven..."
     sudo tar -xzf "$MAVEN_TAR" -C /opt
     sudo ln -sfn "/opt/apache-maven-${MAVEN_VERSION}" /opt/maven
     rm "$MAVEN_TAR"
-
-    echo "Configuring Maven environment..."
-    sudo tee /etc/profile.d/maven.sh > /dev/null <<EOF
+    sudo tee /etc/profile.d/maven.sh >/dev/null <<'EOF'
 export M2_HOME=/opt/maven
-export PATH=\$M2_HOME/bin:\$PATH
+export PATH=$M2_HOME/bin:$PATH
 EOF
-
     sudo chmod +x /etc/profile.d/maven.sh
-
-    echo "Patching ~/.bashrc to always source Maven..."
-    if ! grep -q "/etc/profile.d/maven.sh" ~/.bashrc; then
-      echo 'if [ -f /etc/profile.d/maven.sh ]; then source /etc/profile.d/maven.sh; fi' >> ~/.bashrc
-    fi
-
-    # Source for current session
+    # shellcheck disable=SC1091
     source /etc/profile.d/maven.sh
-  else
-    echo "Maven already installed."
   fi
-
-  echo "Verifying Maven..."
-  mvn -version
 }
 
-# ===== SYSCTL CONFIG FOR ELASTICSEARCH =====
-echo "Configuring vm.max_map_count..."
-sudo sysctl -w vm.max_map_count=262144
-grep -q "vm.max_map_count=262144" /etc/sysctl.conf || echo 'vm.max_map_count=262144' | sudo tee -a /etc/sysctl.conf
+# ===== Kernel & user limits for Elasticsearch =====
+echo "=== Configuring kernel & user limits for ES ==="
+sudo tee /etc/sysctl.d/99-sonarqube.conf >/dev/null <<'EOF'
+vm.max_map_count=262144
+fs.file-max=65536
+EOF
+sudo sysctl --system
 
-# ===== INSTALL POSTGRESQL =====
+getent group "${SONAR_GROUP}" >/dev/null || sudo groupadd "${SONAR_GROUP}"
+id -u "${SONAR_USER}" &>/dev/null || sudo useradd --system --gid "${SONAR_GROUP}" --home "${SONAR_DIR}" --shell /usr/sbin/nologin "${SONAR_USER}"
+
+sudo tee /etc/security/limits.d/99-sonarqube.conf >/dev/null <<EOF
+${SONAR_USER} soft nofile 65536
+${SONAR_USER} hard nofile 65536
+${SONAR_USER} soft nproc  4096
+${SONAR_USER} hard nproc  4096
+EOF
+
+# ===== PostgreSQL (Native Ubuntu 20.04 Repo) =====
 echo "=== Installing PostgreSQL ==="
 if ! command -v psql &>/dev/null; then
-  wget -qO - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /usr/share/keyrings/postgresql.gpg
-  echo "deb [signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
-  sudo apt-get update -y
+  echo "Using default Ubuntu focal repositories..."
   sudo apt-get install -y postgresql postgresql-contrib
 else
   echo "PostgreSQL already installed."
 fi
 
-echo "Configuring PostgreSQL user and DB..."
-sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='$POSTGRES_USER'" | grep -q 1 || \
-  sudo -u postgres psql -c "CREATE USER $POSTGRES_USER WITH ENCRYPTED PASSWORD '$POSTGRES_PASSWORD';"
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
 
-sudo -u postgres psql -tAc "SELECT 1 FROM pg_database WHERE datname='$POSTGRES_DB'" | grep -q 1 || \
-  sudo -u postgres psql -c "CREATE DATABASE $POSTGRES_DB OWNER $POSTGRES_USER;"
+echo "=== Configuring PostgreSQL user & DB ==="
+# Allow user/DB creation to fail silently if they already exist
+sudo -u postgres psql -c "CREATE USER ${POSTGRES_USER} WITH ENCRYPTED PASSWORD '${POSTGRES_PASSWORD}';" || true
+sudo -u postgres psql -c "CREATE DATABASE ${POSTGRES_DB} OWNER ${POSTGRES_USER};" || true
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ${POSTGRES_DB} TO ${POSTGRES_USER};"
 
-echo "GRANT ALL PRIVILEGES ON DATABASE $POSTGRES_DB TO $POSTGRES_USER;" | sudo -u postgres psql
-
-# ===== INSTALL SONARQUBE =====
+# ===== SonarQube install =====
 echo "=== Installing SonarQube ==="
-if [ ! -d "/opt/sonarqube" ]; then
-  echo "Downloading SonarQube..."
+if [ ! -d "${SONAR_DIR}" ]; then
   wget -nv "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-${SONARQUBE_VERSION}.zip"
-  sudo unzip -o "sonarqube-${SONARQUBE_VERSION}.zip" -d /opt
-  sudo mv "/opt/sonarqube-${SONARQUBE_VERSION}" /opt/sonarqube
+  sudo unzip -qo "sonarqube-${SONARQUBE_VERSION}.zip" -d /opt
+  sudo mv "/opt/sonarqube-${SONARQUBE_VERSION}" "${SONAR_DIR}"
   rm "sonarqube-${SONARQUBE_VERSION}.zip"
-else
-  echo "SonarQube already present in /opt/sonarqube"
 fi
 
-echo "Creating SonarQube user/group..."
-getent group ddsonar >/dev/null || sudo groupadd ddsonar
-id -u ddsonar &>/dev/null || sudo useradd --system --gid ddsonar --home /opt/sonarqube --shell /bin/false ddsonar
-sudo chown -R ddsonar:ddsonar /opt/sonarqube
-sudo chmod +x /opt/sonarqube/bin/linux-x86-64/sonar.sh
+sudo chown -R "${SONAR_USER}:${SONAR_GROUP}" "${SONAR_DIR}"
 
-echo "Configuring SonarQube DB connection..."
-sudo tee /opt/sonarqube/conf/sonar.properties > /dev/null <<EOF
-sonar.jdbc.username=$POSTGRES_USER
-sonar.jdbc.password=$POSTGRES_PASSWORD
-sonar.jdbc.url=jdbc:postgresql://localhost:5432/$POSTGRES_DB
+# ===== SonarQube DB config =====
+sudo tee "${SONAR_DIR}/conf/sonar.properties" >/dev/null <<EOF
+sonar.jdbc.username=${POSTGRES_USER}
+sonar.jdbc.password=${POSTGRES_PASSWORD}
+sonar.jdbc.url=jdbc:postgresql://localhost:5432/${POSTGRES_DB}
 EOF
 
-# ===== CREATE SYSTEMD SERVICE =====
-echo "=== Creating systemd unit for SonarQube ==="
-sudo tee /etc/systemd/system/sonar.service > /dev/null <<EOF
+# ===== systemd unit =====
+sudo tee /etc/systemd/system/sonar.service >/dev/null <<EOF
 [Unit]
 Description=SonarQube service
-After=network.target
+After=network.target postgresql.service
 
 [Service]
 Type=forking
-ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
-ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
-User=ddsonar
-Group=ddsonar
-Restart=always
+User=${SONAR_USER}
+Group=${SONAR_GROUP}
+WorkingDirectory=${SONAR_DIR}
+ExecStart=${SONAR_DIR}/bin/linux-x86-64/sonar.sh start
+ExecStop=${SONAR_DIR}/bin/linux-x86-64/sonar.sh stop
 LimitNOFILE=65536
 LimitNPROC=4096
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 sudo systemctl daemon-reload
-sudo systemctl enable sonar.service
-sudo systemctl restart sonar.service
+sudo systemctl enable sonar
+sudo systemctl restart sonar
 
-echo "SonarQube is running. Access it at http://<your-server-ip>:9000"
-
-# ===== CALL INSTALL FUNCTIONS =====
+# ----- Optional tools -----
 install_kubectl
 install_aws_cli
 install_maven
 
-echo "ALL DONE! SonarQube setup completed successfully."
-echo "Open a new SSH session or run: source ~/.bashrc"
-echo "Test Maven: mvn -version"
+echo "ALL DONE! Access SonarQube at: http://$(curl -s ifconfig.me):9000"
+
