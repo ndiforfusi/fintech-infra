@@ -15,7 +15,7 @@ variable "main-region" {
 
 variable "cluster_name" {
   type    = string
-  default = "class40-prod-dominion-cluster-chris"
+  default = "class40-prod-chris"
 }
 
 variable "rolearn" {
@@ -79,7 +79,7 @@ variable "san_domains" {
 variable "route53_zone_id" {
   description = "Route 53 Hosted Zone ID"
   type        = string
-  default     = "Z08551882JISWBCCVA95I" # Replace with actual Route 53 Zone ID
+  default     = "Z09158922MIFTD61GXDQB" # Replace with actual Route 53 Zone ID
 }
 
 
