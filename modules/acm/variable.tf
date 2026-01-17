@@ -2,7 +2,7 @@
 variable "domain_name" {
   description = "Primary domain name for the certificate"
   type        = string
-  default     = "fusisoft.com"
+  default     = "fusisoftchris.com"
 }
 
 variable "san_domains" {
@@ -20,7 +20,7 @@ variable "route53_zone_id" {
 variable "tags" {
   description = "Common tags for the cluster resources"
   type        = map(string)
-  default     = {
+  default = {
     env       = "dev",
     terraform = "true"
   }

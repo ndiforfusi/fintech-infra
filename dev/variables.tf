@@ -46,7 +46,7 @@ variable "tags" {
 variable "cluster_name" {
   description = "Name of the EKS cluster"
   type        = string
-  default     = "class40-dev-dominion-cluster-chris"
+  default     = "class40-prod-chris"
 }
 
 variable "rolearn" {
@@ -97,7 +97,7 @@ variable "san_domains" {
 variable "route53_zone_id" {
   description = "Route 53 hosted zone ID for domain validation"
   type        = string
-  default     = "Z08551882JISWBCCVA95I"
+  default     = "Z09158922MIFTD61GXDQB"
 }
 
 ################################################################################
