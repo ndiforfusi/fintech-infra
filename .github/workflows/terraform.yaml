@@ -6,11 +6,11 @@ name: Terraform-AWS-Infra-Deployment
 on:
   push:
     branches:
-      - release   
+      - dev   
   pull_request:
     branches:
       - main 
-      - release
+      - dev
   workflow_dispatch:
     inputs:
       environment:
@@ -23,8 +23,8 @@ on:
         default: "us-east-2"
       action:
         description: "Terraform action: apply (default) or destroy"
-        required: false
-        default: "apply"
+        required: true
+        default: "destroy"
 
 concurrency:
   group: terraform-${{ github.ref }}

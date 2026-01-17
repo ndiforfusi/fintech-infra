@@ -15,12 +15,12 @@ variable "main-region" {
 
 variable "cluster_name" {
   type    = string
-  default = "prod-dominion-cluster"
+  default = "prod-dominion-cluster1"
 }
 
 variable "rolearn" {
   description = "Add admin role to the aws-auth configmap"
-  default     = "arn:aws:iam::327019199684:role/terraform-create-role"
+  default     = "arn:aws:iam::805703880776:role/terraform-create-role"
 }
 
 # ################################################################################
@@ -60,7 +60,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "The key name for the instance"
   type        = string
-  default     = "class38_demo_key"
+  default     = "myclass40key"
 }
 
 #Amazon Certificate Manager
@@ -87,7 +87,7 @@ variable "route53_zone_id" {
 
 variable "aws_account_id" {
   description = "AWS Account ID"
-  default     = "327019199684"
+  default     = "805703880776"
 }
 
 variable "repositories" {

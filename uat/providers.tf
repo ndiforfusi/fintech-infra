@@ -1,7 +1,7 @@
 
 provider "aws" {
-  region = us-eest-2
-  alias  = "us-eest-2"
+  region = us-east-2
+  alias  = "us-east-2"
 }
 
 provider "kubernetes" {
@@ -29,7 +29,7 @@ provider "helm" {
 
 # provider "helm" {
 
-#   alias = "dominion-cluster"
+#   alias = "dominion-cluster1"
 #   kubernetes {
 #     host                   = module.eks.cluster_endpoint
 #     cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)

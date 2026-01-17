@@ -2,7 +2,8 @@
 data "aws_ami" "ubuntu_latest" {
   count       = var.ami_id == "" ? 1 : 0
   most_recent = true
-  owners      = ["099720109477"] # Canonical's owner ID for Ubuntu
+
+  owners = ["099720109477"] # Canonical (Ubuntu)
 
   filter {
     name   = "name"
@@ -14,6 +15,7 @@ data "aws_ami" "ubuntu_latest" {
     values = ["hvm"]
   }
 }
+
 
 # Local variable that selects either the provided ami_id or the one fetched above.
 locals {
