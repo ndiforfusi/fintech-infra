@@ -15,7 +15,7 @@ variable "env_name" {
 
 variable "cluster_name" {
   type    = string
-  default = "dominion-cluster"
+  default = "dominion-cluster1"
 }
 
 variable "oidc_provider_arn" {

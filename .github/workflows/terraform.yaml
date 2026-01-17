@@ -6,11 +6,11 @@ name: Terraform-AWS-Infra-Deployment
 on:
   push:
     branches:
-      - release   
+      - dev   
   pull_request:
     branches:
       - main 
-      - release
+      - dev
   workflow_dispatch:
     inputs:
       environment:
@@ -101,4 +101,4 @@ jobs:
       - name: Terraform Destroy
         if: ${{ github.event.inputs.action == 'destroy' }}
         working-directory: ${{ env.TF_DIR }}
-        run: terraform destroy -auto-approve -lock=false
+        run: terraform destroy -auto-approve -lock=true

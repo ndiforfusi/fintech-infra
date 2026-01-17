@@ -2,21 +2,19 @@
 # EKS Data + Auth
 ##############################################
 
-data "aws_eks_cluster_auth" "main" {
-  name = module.eks.cluster_name
-}
-
-data "aws_caller_identity" "current" {}
-
 provider "kubernetes" {
   host                   = module.eks.cluster_endpoint
   cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
     command     = "aws"
     args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
   }
 }
+
+
+
 
 ##############################################
 # EKS Control Plane + Node Groups + Add-ons
@@ -110,7 +108,7 @@ module "eks" {
       principal_arn     = "arn:aws:iam::999568710647:user/nfusi"
       policy_associations = [
         {
-          policy_arn  = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
           access_scope = { type = "cluster" }
         }
       ]
@@ -121,7 +119,7 @@ module "eks" {
       principal_arn     = "arn:aws:iam::999568710647:role/github-runner-ssm-role"
       policy_associations = [
         {
-          policy_arn  = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
           access_scope = { type = "cluster" }
         }
       ]

@@ -5,7 +5,7 @@
 *.tfstate
 *.tfstate.*
 *.tfplan
-
+*.workspace
 # Crash log files
 crash.log
 
@@ -21,6 +21,7 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+
 
 # Ignore CLI configuration files
 .terraformrc
