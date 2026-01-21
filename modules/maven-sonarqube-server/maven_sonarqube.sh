@@ -1,3 +1,4 @@
+
 #!/bin/bash
 set -euo pipefail
 
@@ -155,3 +156,4 @@ install_aws_cli
 install_maven
 
 echo "ALL DONE! Access SonarQube at: http://$(curl -s ifconfig.me):9000"
+
