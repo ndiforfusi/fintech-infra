@@ -5,7 +5,7 @@
 variable "aws_account_id" {
   description = "AWS Account ID"
   type        = string
-  default     = "327019199684"
+  default     = "705008887786"
 }
 
 variable "aws_region" {
@@ -33,7 +33,7 @@ variable "env_name" {
 variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
-  default = {
+  default     = {
     product   = "fintech-app"
     ManagedBy = "terraform"
   }
@@ -120,21 +120,21 @@ variable "namespaces" {
     annotations = map(string)
     labels      = map(string)
   }))
-  default = {
+  default   = {
     fintech = {
       annotations = {
-        name = "fintech"
+        name   = "fintech"
       }
       labels = {
-        app = "webapp"
+        app   = "webapp"
       }
     },
     monitoring = {
       annotations = {
-        name = "monitoring"
+        name   = "monitoring"
       }
       labels = {
-        app = "webapp"
+        app   = "webapp"
       }
     }
   }
