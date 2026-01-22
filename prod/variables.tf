@@ -5,7 +5,7 @@
 variable "aws_account_id" {
   description = "AWS Account ID"
   type        = string
-  default     = "327019199684"
+  default     = "705008887786"
 }
 
 variable "aws_region" {
@@ -33,7 +33,7 @@ variable "env_name" {
 variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
-  default = {
+  default     = {
     product   = "fintech-app"
     ManagedBy = "terraform"
   }
@@ -75,7 +75,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "EC2 Key Pair name for SSH access"
   type        = string
-  default     = "class38_demo_key"
+  default     = "class39-dominion"
 }
 
 ################################################################################
@@ -85,19 +85,19 @@ variable "key_name" {
 variable "domain_name" {
   description = "Primary domain name for certificate issuance"
   type        = string
-  default     = "dominionsystem.org"
+  default     = "*.fusisoft.com"
 }
 
 variable "san_domains" {
   description = "SANs (Subject Alternative Names) for SSL certificate"
   type        = list(string)
-  default     = ["*.dominionsystem.org"]
+  default     = ["*.fusisoft.com"]
 }
 
 variable "route53_zone_id" {
   description = "Route 53 hosted zone ID for domain validation"
   type        = string
-  default     = "Z05475331ZK00RPD27RX0"
+  default     = "ZC7WDABJDII2"
 }
 
 ################################################################################
@@ -107,7 +107,7 @@ variable "route53_zone_id" {
 variable "repositories" {
   description = "List of ECR repositories to create"
   type        = list(string)
-  default     = ["fintech-app"]
+  default     = ["fintech-app","gateway"]
 }
 
 ################################################################################
@@ -120,21 +120,21 @@ variable "namespaces" {
     annotations = map(string)
     labels      = map(string)
   }))
-  default = {
+  default   = {
     fintech = {
       annotations = {
-        name = "fintech"
+        name   = "fintech"
       }
       labels = {
-        app = "webapp"
+        app   = "webapp"
       }
     },
     monitoring = {
       annotations = {
-        name = "monitoring"
+        name   = "monitoring"
       }
       labels = {
-        app = "webapp"
+        app   = "webapp"
       }
     }
   }
