@@ -105,9 +105,9 @@ module "eks" {
   # Access entries (IAM Identity Center or user/role mapping)
   ##############################################
   access_entries = {
-    Wilson = {
+    Ikechukwu_Ijeoma = {
       kubernetes_groups = ["eks-admins"]
-      principal_arn     = "arn:aws:iam::957877468227:user/wilson"
+      principal_arn     = "arn:aws:iam::957877468227:user/Ikechukwu_Ijeoma"
       policy_associations = [
         {
           policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
