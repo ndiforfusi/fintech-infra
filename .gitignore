@@ -27,4 +27,4 @@ override.tf.json
 terraform.rc
 #Ignore visual studio workspace
 *.code-workspace
-
+#Ignore visual studio 
