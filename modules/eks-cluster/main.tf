@@ -29,7 +29,7 @@ module "eks" {
   cluster_name    = var.cluster_name
   cluster_version = "1.32"
 
-  enable_cluster_creator_admin_permissions = false
+  enable_cluster_creator_admin_permissions = true
   cluster_endpoint_public_access           = true
 
   # ✅ Let Terraform manage add-ons
