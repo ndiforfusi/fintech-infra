@@ -1,7 +1,7 @@
 variable "aws_account_id" {
   description = "AWS Account ID"
   type        = string
-  default     = "999568710647"
+  default     = "977099032919"
 }
 
 variable "aws_region" {
@@ -28,7 +28,7 @@ variable "eks_oidc_provider" {
 variable "tags" {
   description = "Common tags for the cluster resources"
   type        = map(string)
-  default     = {
+  default = {
     terraform = "true"
   }
 }
