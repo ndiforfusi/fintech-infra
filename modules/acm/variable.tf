@@ -8,8 +8,8 @@ variable "domain_name" {
 variable "san_domains" {
   description = "Subject alternative names for the certificate"
   type        = list(string)
-  default     = ["*.chris-systems.com"]
-}
+  default = ["www.chris-systems.com", "*.chris-systems.com"]
+
 
 variable "route53_zone_id" {
   description = "Route 53 Hosted Zone ID"
