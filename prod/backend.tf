@@ -4,6 +4,6 @@ terraform {
     key            = "prod/terraform.state"
     bucket         = "projectgroup-a-terraform-backend-bucket"
     region         = "us-east-2"
-    dynamodb_table = "terraform-state-locking"
+    dynamodb_table = "terraform-tooling-state-locking"
   }
 }
