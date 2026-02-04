@@ -135,7 +135,7 @@ module "eks" {
 # RBAC Bindings with depends_on
 ##############################################
 
-resource "kubernetes_cluster_role_binding" "platform_admins_binding" {
+resource "kubernetes_cluster_role_binding_v1" "platform_admins_binding" {
   metadata {
     name = "platform-admins-binding"
   }
