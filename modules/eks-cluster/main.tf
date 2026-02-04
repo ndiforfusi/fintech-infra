@@ -110,7 +110,7 @@ module "eks" {
       principal_arn     = "arn:aws:iam::999568710647:user/nfusi"
       policy_associations = [
         {
-          policy_arn  = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
           access_scope = { type = "cluster" }
         }
       ]
@@ -121,7 +121,7 @@ module "eks" {
       principal_arn     = "arn:aws:iam::999568710647:role/github-runner-ssm-role"
       policy_associations = [
         {
-          policy_arn  = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
           access_scope = { type = "cluster" }
         }
       ]
@@ -135,7 +135,7 @@ module "eks" {
 # RBAC Bindings with depends_on
 ##############################################
 
-resource "kubernetes_cluster_role_binding" "platform_admins_binding" {
+resource "kubernetes_cluster_role_binding_v1" "platform_admins_binding" {
   metadata {
     name = "platform-admins-binding"
   }
@@ -155,7 +155,7 @@ resource "kubernetes_cluster_role_binding" "platform_admins_binding" {
   depends_on = [module.eks]
 }
 
-resource "kubernetes_cluster_role_binding" "eks_admins_binding" {
+resource "kubernetes_cluster_role_binding_v1" "eks_admins_binding" {
   metadata {
     name = "eks-admins-binding"
   }
@@ -179,7 +179,7 @@ resource "kubernetes_cluster_role_binding" "eks_admins_binding" {
 # Kubernetes Namespaces with depends_on
 ##############################################
 
-resource "kubernetes_namespace" "fintech" {
+resource "kubernetes_namespace" "fintech"{
   metadata {
     name = "fintech"
     annotations = {
@@ -193,7 +193,7 @@ resource "kubernetes_namespace" "fintech" {
   depends_on = [module.eks]
 }
 
-resource "kubernetes_namespace" "monitoring" {
+resource "kubernetes_namespace" "monitoring"{
   metadata {
     name = "monitoring"
     annotations = {
