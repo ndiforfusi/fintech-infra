@@ -179,7 +179,7 @@ resource "kubernetes_cluster_role_binding" "eks_admins_binding" {
 # Kubernetes Namespaces with depends_on
 ##############################################
 
-resource "kubernetes_namespace" "fintech" {
+resource "kubernetes_namespace" "fintech"{
   metadata {
     name = "fintech"
     annotations = {
@@ -193,7 +193,7 @@ resource "kubernetes_namespace" "fintech" {
   depends_on = [module.eks]
 }
 
-resource "kubernetes_namespace" "monitoring" {
+resource "kubernetes_namespace" "monitoring"{
   metadata {
     name = "monitoring"
     annotations = {
